@@ -17,7 +17,8 @@ declare module "next-auth" {
     user_info: NextAuthUser;
     id: number;
     error?: {
-      status: number;
+      //eslint-disable-next-line
+      status: any;
       data: unknown;
     };
   }
