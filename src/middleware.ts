@@ -7,7 +7,7 @@ export { default } from "next-auth/middleware";
 
 export const config = {
   matcher: [
-    "/app/:path*", // Matches all routes starting with /app
+    "/example/:path*", // Matches all routes starting with /app
   ],
 };
 

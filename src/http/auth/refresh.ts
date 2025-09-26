@@ -10,7 +10,7 @@ export interface RefreshResponse {
 
 export async function refreshToken(data: RefreshRequest) {
   const response = await api.post<RefreshResponse>(
-    "/auth/token/refresh/",
+    "/auth/tokens/refresh/",
     data
   );
 

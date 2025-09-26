@@ -16,7 +16,7 @@ export interface SignInResponse {
 }
 
 export async function signIn(data: SignInRequest) {
-  const response = await api.post<SignInResponse>("/auth/token/", data);
+  const response = await api.post<SignInResponse>("/auth/tokens/", data);
 
   return response;
 }
