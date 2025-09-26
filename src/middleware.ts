@@ -13,12 +13,12 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request });
-  // const url = request.nextUrl.clone();
+  const url = request.nextUrl.pathname;
 
-  if (!token || token.error) {
+  if ((!token || token.error) && url !== '/auth/sign-in') {
     return NextResponse.redirect(`${env.NEXTAUTH_URL}/auth/sign-in`);
   }
-
+  
   if (token && token.error === "RefreshAccessTokenError") {
     return NextResponse.redirect(`${env.NEXTAUTH_URL}/auth/sign-in`);
   }
