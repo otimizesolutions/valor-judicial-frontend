@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./src/assets/logo.png" alt="Valor Judicial" />
+    <img src="./public/logo.png" alt="Valor Judicial" />
 </p>
 
 # Valor Judicial
