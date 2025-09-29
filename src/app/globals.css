@@ -3,6 +3,84 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+@theme {
+  
+  --color-blue-50: #93bfd2;
+  --color-blue-100: #7da8bb;
+  --color-blue-200: #6792a5;
+  --color-blue-300: #527d8f;
+  --color-blue-400: #3c6879;
+  --color-blue-500: #275465;
+  --color-blue-600: #0f4051;
+  --color-blue-700: #082d39;
+  --color-blue-800: #0c1a20;
+  --color-blue-900: #000000;
+  
+  /* Escala de Cores - Amarelo (Linha 2) */
+  --color-yellow-50: #fffba;
+  --color-yellow-100: #ffe280;
+  --color-yellow-200: #f9c542;
+  --color-yellow-300: #e8ac12;
+  --color-yellow-400: #cf960e;
+  --color-yellow-500: #b6800b;
+  --color-yellow-600: #9e6c08;
+  --color-yellow-700: #865705;
+  --color-yellow-800: #6f4403;
+  --color-yellow-900: #593100;
+  
+  /* Escala de Cores - Cinza */
+  --color-gray-50: #ffffff;
+  --color-gray-100: #e2e3e5;
+  --color-gray-200: #c5c9cc;
+  --color-gray-300: #a9adb3;
+  --color-gray-400: #8f9399;
+  --color-gray-500: #757a80;
+  --color-gray-600: #5d6268;
+  --color-gray-700: #464b50;
+  --color-gray-800: #30353a;
+  --color-gray-900: #1c2025;
+  
+  /* Escala de Cores - Vermelho */
+  --color-red-50: #ffe7ea;
+  --color-red-100: #ffc5c6;
+  --color-red-200: #fda2a3;
+  --color-red-300: #f77d82;
+  --color-red-400: #ed5562;
+  --color-red-500: #cf3e4c;
+  --color-red-600: #ac2e39;
+  --color-red-700: #8a1e28;
+  --color-red-800: #690e17;
+  --color-red-900: #4b0000;
+  
+  /* Escala de Cores - Amarelo (Linha 5 e 6) */
+  --color-yellow-extra-light: #fffccd;
+  --color-yellow-extra-100: #ffe392;
+  --color-yellow-extra-200: #ffc550;
+  --color-yellow-extra-300: #efac2d;
+  --color-yellow-extra-400: #d69625;
+  --color-yellow-extra-500: #bd811d;
+  --color-yellow-extra-600: #a56d15;
+  --color-yellow-extra-700: #8e590d;
+  --color-yellow-extra-800: #774606;
+  --color-yellow-extra-900: #613300;
+  
+  /* Escala de Cores - Verde */
+  --color-green-50: #d8ffff;
+  --color-green-100: #aee9d8;
+  --color-green-200: #82c3b3;
+  --color-green-300: #51bd8e;
+  --color-green-400: #30a471;
+  --color-green-500: #258a59;
+  --color-green-600: #1a7143;
+  --color-green-700: #0e582d;
+  --color-green-800: #034118;
+  --color-green-900: #002b00;
+  
+  --font-lato: var(--font-lato);
+  --font-poppins: var(--font-poppins);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
