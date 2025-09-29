@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+    <img src="./src/assets/logo.png" alt="Valor Judicial" />
+</p>
 
-## Getting Started
+# Valor Judicial
 
-First, run the development server:
+## Executando
+
+1. Clonar o repositório:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/otimizesolutions/valor-judicial-frontend.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Criar os arquivos `.env` necessários:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd valor-judicial-frontend
+cp env.local.example env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Executando
 
-## Learn More
+Para executar a aplicação, com todos os componentes, em ambiente de desenvolvimento, executar:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker compose up --build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Comandos para desenvolvimento
 
-## Deploy on Vercel
+```bash
+# Rodar o projeto sem o docker (Apenas para debug)
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acessando a aplicação
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A aplicação pode ser acessada em `http://localhost:3000`.
+
+## Variáveis de ambiente
+
+> A coluna Obrigatório só indica que uma variável é requerida pra executar a aplicação ou se pode ser deixada em branco. Assim, no caso de uma execução para testes, algumas delas podem ser ignoradas. Para o correto funcionamento da aplicação, todas são necessárias.
+
+
+| Variável | Tipo | Obrigatório? | Valor Padrão | Descrição |
+| :--- | :--- | :--- | :--- | :--- |
+| `NEXTAUTH_SECRET` | String | Sim | - | Chave secreta usada pelo NextAuth para criptografar sessões e tokens JWT. **É crucial para a segurança**. |
+| `NEXT_PUBLIC_NODE_ENV` | String | Não | `development` | Define o ambiente em que a aplicação está rodando (por exemplo, `development`, `production`). Variáveis com `NEXT_PUBLIC_` são visíveis no navegador. |
+| `NEXT_PUBLIC_API_BASE_URL` | String | Sim | - | O URL da sua API de backend. Como tem o prefixo `NEXT_PUBLIC_`, ela é acessível tanto no servidor quanto no cliente. |
+| `NEXTAUTH_URL` | String | Não | `http://localhost:3000` | O URL principal da sua aplicação. É usado pelo NextAuth para redirecionamentos e callbacks. Em ambientes como Vercel, costuma ser preenchido automaticamente. |
+
