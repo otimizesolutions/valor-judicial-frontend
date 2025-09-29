@@ -8,7 +8,7 @@ export default function AuthenticatedPage() {
       Aqui só usuário autenticado.
       <ErrorBoundary fallback={<>Aconteceu um Erro buscando usuários!</>}>
         <Suspense fallback={<>Carregando os usuários</>}>
-          <UsersList />
+          {/* <UsersList /> */}
         </Suspense>
       </ErrorBoundary>
     </>

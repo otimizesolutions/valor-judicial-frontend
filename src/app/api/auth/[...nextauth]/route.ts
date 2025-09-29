@@ -79,7 +79,7 @@ const handler = NextAuth({
           if (error instanceof AxiosError) {
             return {
               error: {
-                status: error?.response?.status,
+                status: error?.response?.status || 400,
                 data: error?.response?.data,
               },
               id: 0,
@@ -93,7 +93,7 @@ const handler = NextAuth({
         }
         return {
           error: {
-            status: "",
+            status: 400,
             data: { detail: "Erro desconhecido!" },
           },
           id: 0,
