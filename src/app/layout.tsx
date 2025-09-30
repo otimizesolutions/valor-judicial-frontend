@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lato.className} ${poppins.className} antialiased`}
+        className={`${lato.className} ${poppins.className} m-8 antialiased`}
       >
         <Providers>{children}</Providers>
       </body>

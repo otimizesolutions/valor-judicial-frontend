@@ -188,6 +188,22 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: var(--color-gray-900)
+}
+
+.subtitle {
+  color: var(--color-gray-500)
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
