@@ -14,18 +14,15 @@ interface EmployeeCitationCardProps {
 
 export function EmployeeCitationCard({citation, setCitationFunction}: EmployeeCitationCardProps ){
   function nextCitation(){
-    const currentIndex = citation.id
+    const currentIndex = citations.findIndex(c => c.id === citation.id);
     const nextIndex = (currentIndex + 1) % citations.length
     setCitationFunction(citations[nextIndex])
-
+    
   }
   function previousCitation(){
-    //FIXME não funciona
-    const currentIndex = citation.id
+    const currentIndex = citations.findIndex(c => c.id === citation.id);
     const nextIndex = (currentIndex - 1 + citations.length) % citations.length;
-    console.log(nextIndex)
     setCitationFunction(citations[nextIndex])
-    console.log("Previous")
 
   }
   return (
