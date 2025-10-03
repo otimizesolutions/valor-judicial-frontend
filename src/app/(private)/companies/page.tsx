@@ -1,6 +1,7 @@
 import { AddButton } from "@/components/add-button";
 import { Button } from "@/components/button";
 import { ScrollTextIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function Companies(){
   return (
@@ -15,8 +16,11 @@ export default function Companies(){
           <ScrollTextIcon className="text-blue-500"/>
           <p className="text-blue-500">Relatórios</p>
         </Button>
+        {/* Testing */}
+        <Link href={'/dashboard'}> 
+          <AddButton name="Adicionar empresa"/>
+        </Link>
 
-        <AddButton name="Adicionar empresa"/>
       </nav>
 
     </div>

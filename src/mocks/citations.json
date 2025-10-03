@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "description": "“Desde 2008 atuo exclusivamente com recuperação judicial, unindo direito e tecnologia para trazer efetividade e agilidade aos processos.”",
+    "name": "Dr. Dobson Vicentini",
+    "position": "Advogado especialista em Recuperação Judicial",
+    "image": "/auth/dobson-bg.png"
+  },
+  {
+    "id": 2,
+    "description": "“A Recuperação Judicial exige mais do que conhecimento técnico: exige empatia com a dor do empresário. Minha missão é unir estratégia e prática para oferecer a melhor solução em cada caso.”",
+    "name": "Dr. Victor Andrade",
+    "position": "Especialista em Administração Judicial",
+    "image": "/auth/victor-bg.png"
+  },
+  {
+    "id": 3,
+    "description": "“Com minha trajetória no TJ-GO e experiência acadêmica, tenho orgulho de contribuir para que a Recuperação Judicial no Brasil evolua com decisões mais justas, modernas e efetivas.”",
+    "name": "Dr. Floriano Gomes",
+    "position": "Desembargador aposentado do TJ-GO",
+    "image": "/auth/floriano-bg.png"
+  }
+]
