@@ -18,7 +18,7 @@ export const useLoginMutation = (form: Form<MutationProps>) => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/example",
+        callbackUrl: "/dashboard",
       });
       if (response?.error) {
         console.log(response?.error);
@@ -26,7 +26,7 @@ export const useLoginMutation = (form: Form<MutationProps>) => {
       }
     },
     onSuccess: () => {
-      router.push("/example");
+      router.push("/dashboard");
       toast.success("Login realizado com sucesso");
     },
     onError: (error) => {

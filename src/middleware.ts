@@ -6,6 +6,8 @@ import { env } from "./env";
 export const config = {
   matcher: [
     "/example/:path*", // Matches all routes starting with /app
+    "/dashboard/:path*",
+    "/companies/:path*",
     "/"
   ],
 };
