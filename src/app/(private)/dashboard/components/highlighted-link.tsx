@@ -2,7 +2,7 @@ import { AlarmClockCheckIcon, ArrowRightIcon } from "lucide-react";
 
 export function HighlightedLink(){
   return (
-    <div className="px-6 py-4 flex-1 border border-gray-100 rounded-lg">
+    <div className="px-6 py-4 border border-gray-100 rounded-lg">
       <div className="centered gap-2">
         <AlarmClockCheckIcon />
         <p className="text-gray-900 w-full">Processos em sua posse</p>
