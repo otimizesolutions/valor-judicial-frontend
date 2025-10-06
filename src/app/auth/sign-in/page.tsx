@@ -5,8 +5,8 @@ import { EmployeeCitation } from "./components/employee-citation";
 
 export default function SignInPage() {
   return (
-    <div className="grid grid-cols-2">
-      <div className="flex flex-col p-8">
+    <div className="xl:grid xl:grid-cols-2">
+      <div className="flex flex-col p-8 h-screen">
         <Image src={Logo} alt="Ícone da Valor Judicial"/>
         <div className="flex flex-col items-center justify-center flex-1">
           <div className="w-full max-w-sm">
