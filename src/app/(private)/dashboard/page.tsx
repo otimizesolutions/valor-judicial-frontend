@@ -7,14 +7,12 @@ export default function Dashboard(){
     <div>
       <Header />
 
-      <section className="mt-6 flex gap-6">
+      <section className="mt-6 grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
         <HighlightedLink />
         <HighlightedLink />
         <HighlightedLink />
         <HighlightedLink />
       </section>
-
-      
 
     </div>
   )
