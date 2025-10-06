@@ -67,7 +67,7 @@ export const LoginForm = () => {
             <Checkbox className="data-[state=checked]:bg-yellow-200 data-[state=checked]:border-yellow-200 size-4"/>
             <Label className="text-gray-900">Lembrar dados</Label>
           </div>
-          <Link href={'/'} className="text-gray-900">Esqueci minha senha</Link>
+          <Link href={''} className="text-gray-900">Esqueci minha senha</Link>
         </div>
         <div className="flex flex-col items-center">
           <Button
@@ -79,9 +79,13 @@ export const LoginForm = () => {
             {loginMutation.isPending ? "Signing in..." : "Sign In"}
           </Button>
 
-          <Link href="/auth/signup" className="mt-5">
-            Criar uma conta
-          </Link>
+          <div className="flex gap-1 mt-5">
+            <p className="text-gray-900">Não tem uma conta?</p>
+            <Link href="/auth/signup" className="text-blue-600 hover:underline">
+              Clique aqui
+            </Link>
+          </div>
+          
         </div>
       </form>
     </Form>
