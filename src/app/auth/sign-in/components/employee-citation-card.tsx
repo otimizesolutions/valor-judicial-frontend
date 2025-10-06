@@ -1,15 +1,20 @@
 import citations from "@/mocks/citations.json"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { Dispatch, SetStateAction } from "react";
+
+
+interface Citation {
+  id: number;
+  description: string;
+  name: string;
+  position: string;
+  image: string;
+
+}
 
 interface EmployeeCitationCardProps {
-  citation: {
-    id: number;
-    description: string;
-    name: string;
-    position: string;
-    image: string;
-}
-  setCitationFunction: () => null
+  citation: Citation
+  setCitationFunction: Dispatch<SetStateAction<Citation>>
 }
 
 export function EmployeeCitationCard({citation, setCitationFunction}: EmployeeCitationCardProps ){
