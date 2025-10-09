@@ -1,6 +1,9 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { Company } from '../interfaces'
+import { Edit2, Eye } from 'lucide-react'
+import Link from 'next/link'
 import { TableObjects } from '@/components/table-objects/table'
+import { Button } from '@/components/ui/button'
 
 export function Table() {
   const dataJson: Company[] = [
@@ -344,6 +347,32 @@ export function Table() {
     { accessorKey: 'area', header: 'Setor de Atuação' },
     { accessorKey: 'state', header: 'Estado' },
     { accessorKey: 'city', header: 'Cidade' },
+    {
+      id: 'actions',
+      cell: ({ row }) => {
+        // O row.original.id seria ideal aqui, mas estamos usando row.index como no seu exemplo
+        const companyId = row.original.id || row.index
+
+        return (
+          <div className="flex items-center justify-end space-x-5 pr-6">
+
+            {/* Botão Detalhe */}
+            <Link href={`companies/${companyId}`} passHref>
+              <Button variant="ghost" size="icon">
+                <Eye />
+              </Button>
+            </Link>
+
+            {/* Botão Editar */}
+            <Link href={`companies/${companyId}/edit`} passHref>
+              <Button variant="ghost" size="icon">
+                <Edit2 />
+              </Button>
+            </Link>
+          </div>
+        )
+      },
+    },
   ]
   return (
     <TableObjects columns={columns} dataJson={dataJson} />
