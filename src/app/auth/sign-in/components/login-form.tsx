@@ -72,9 +72,8 @@ export const LoginForm = () => {
         <div className="flex flex-col items-center">
           <Button
             type="submit"
-            variant="default"
+            variant="secondary"
             disabled={loginMutation.isPending}
-            className="cursor-pointer w-full bg-blue-600 py-5 "
           >
             {loginMutation.isPending ? "Signing in..." : "Sign In"}
           </Button>

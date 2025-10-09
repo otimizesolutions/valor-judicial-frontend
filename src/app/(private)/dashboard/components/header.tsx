@@ -1,6 +1,5 @@
-import { AddButton } from "@/components/add-button";
-import { Button } from "@/components/button";
-import { ScrollTextIcon, UserRoundSearchIcon } from "lucide-react";
+import { PlusIcon, ScrollTextIcon, UserRoundSearchIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Header(){
   return (
@@ -10,17 +9,20 @@ export function Header(){
         <h2 className="subtitle">Acompanhe, gerencie seus clientes e processos.</h2>
       </div>
       <nav className=" centered gap-3">
-        <Button className="border border-gray-300 centered gap-2">
-          <ScrollTextIcon className="text-blue-500"/>
-          <p className="text-blue-500">Relatórios</p>
+        <Button>
+          <ScrollTextIcon />
+          <p >Relatórios</p>
         </Button>
         
-        <Button className="border border-gray-300 centered gap-2">
-          <UserRoundSearchIcon className="text-blue-500"/>
-          <p className="text-blue-500">Consultar</p>
+        <Button>
+          <UserRoundSearchIcon />
+          <p>Consultar</p>
         </Button>
 
-        <AddButton name="Novo processo"/>
+        <Button variant={"secondary"}>
+          <PlusIcon />
+          <p>Novo Processo</p>
+        </Button>
       </nav>
     </header>
   )
