@@ -8,7 +8,7 @@ import { Table } from './components/table'
 
 export default function Companies() {
   return (
-    <div>
+    <div className="m-8">
       <Header />
 
       {/* Table section */}

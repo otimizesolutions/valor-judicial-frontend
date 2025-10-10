@@ -1,9 +1,25 @@
-import { ReactNode } from "react"
+import type { ReactNode } from 'react'
+import { AppSidebar } from '@/components/sidebar/app-sidebar'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 
-export default function PrivateLayout({children}: {children: ReactNode}){
+export default function PrivateLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="m-8">
-      {children}
-    </div>
+    <SidebarProvider
+      style={
+        {
+          '--sidebar-width': '360px',
+        }
+      }
+
+    >
+      <AppSidebar />
+      <SidebarInset>
+        <main>
+          <SidebarTrigger />
+          {children}
+        </main>
+
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
