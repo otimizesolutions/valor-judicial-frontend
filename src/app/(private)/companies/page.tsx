@@ -22,9 +22,6 @@ export default function Companies() {
 
         <Table />
 
-        {/* <TableObjects /> */}
-        {/* <StickyHeaderTableDemo /> */}
-
       </section>
 
     </div>
