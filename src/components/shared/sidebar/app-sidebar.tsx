@@ -2,8 +2,9 @@
 
 import type { IconNode } from 'lucide-react'
 import { Building, Flag, Home } from 'lucide-react'
-import * as React from 'react'
+import { usePathname } from 'next/navigation'
 
+import * as React from 'react'
 import { Sidebar } from '@/components/ui/sidebar'
 import { SidebarCollapsible } from './sidebar-collapsible/siderbar-collapsible'
 import { SidebarNav } from './sidebar-nav/sidebar-nav'
@@ -49,6 +50,8 @@ const navTabs = [
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [activeTab, setActiveTab] = React.useState(navTabs[0])
   const [activeSubTab, setActiveSubTab] = React.useState(activeTab.navSubTabs[0])
+  const pathName = usePathname()
+  console.log('pathname', pathName)
 
   return (
     <Sidebar

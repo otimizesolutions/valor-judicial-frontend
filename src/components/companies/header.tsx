@@ -10,7 +10,7 @@ export function Header() {
         <h2 className="subtitle">Acompanhe, gerencie as empresas</h2>
       </header>
 
-      <Link href="/dashboard">
+      <Link href="/companies/register">
         <Button variant="secondary" size="default">
           <PlusIcon />
           <p>Adicionar Empresa</p>

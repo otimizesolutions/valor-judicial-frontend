@@ -1,8 +1,8 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { Company } from '../interfaces'
+import type { Company } from '@/app/(private)/companies/interfaces'
 import { Edit2, Eye } from 'lucide-react'
 import Link from 'next/link'
-import { TableObjects } from '@/components/table-objects/table'
+import { TableObjects } from '@/components/shared/table-objects/table'
 import { Button } from '@/components/ui/button'
 
 export function Table() {

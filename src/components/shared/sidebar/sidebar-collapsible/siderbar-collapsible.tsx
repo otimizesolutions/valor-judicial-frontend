@@ -20,14 +20,10 @@ export function SidebarCollapsible({ activeTab, activeSubTab, setActiveSubTab })
               {activeTab.navSubTabs.map(subtab => (
                 <SidebarMenuItem key={subtab.title}>
                   <SidebarMenuButton
-                    // tooltip={{
-                    //   children: subtab.title,
-                    //   hidden: false,
-                    // }}
                     onClick={() => {
                       setActiveSubTab(subtab)
                     }}
-                    // isActive={activeSubTab?.title === subtab.title}
+                    isActive={activeSubTab?.title === subtab.title}
                   >
                     <a
                       href={subtab.link}

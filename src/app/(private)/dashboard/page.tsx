@@ -1,10 +1,11 @@
 'use client'
 
-import { AlarmClock, ListFilterIcon, TriangleAlert } from 'lucide-react'
+import { AlarmClock, ListFilterIcon, Settings2, TriangleAlert } from 'lucide-react'
+import { Header } from '@/components/dashboard/header'
+import { HighlightedLink } from '@/components/dashboard/highlighted-link'
+import { Table } from '@/components/dashboard/table'
 import { Button } from '@/components/ui/button'
-import { Header } from './components/header'
-import { HighlightedLink } from './components/highlighted-link'
-import { Table } from './components/table'
+import { Input } from '@/components/ui/input'
 
 export default function Dashboard() {
   const links = [
@@ -42,6 +43,7 @@ export default function Dashboard() {
           links.map((link) => {
             return (
               <HighlightedLink
+                key={link.title}
                 title={link.title}
                 icon={link.icon}
                 quantity={link.quantity}
@@ -52,11 +54,20 @@ export default function Dashboard() {
       </section>
 
       <section className="mt-4">
-        <div className="mb-4">
-          <Button variant="secondary">
+        <div className="mb-4 flex justify-between items-center">
+          <Button variant="secondary" size="sm">
             <ListFilterIcon />
             Filtros
           </Button>
+
+          <div className="flex items-center space-x-4">
+            <Input />
+            <Button size="sm">
+              <Settings2 />
+              Customizar
+            </Button>
+          </div>
+
         </div>
 
         <Table />

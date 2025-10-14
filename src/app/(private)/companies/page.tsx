@@ -2,9 +2,9 @@
 
 import { ListFilterIcon } from 'lucide-react'
 
+import { Header } from '@/components/companies/header'
+import { Table } from '@/components/companies/table'
 import { Button } from '@/components/ui/button'
-import { Header } from './components/header'
-import { Table } from './components/table'
 
 export default function Companies() {
   return (

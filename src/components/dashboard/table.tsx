@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { Edit2, Eye, Users } from 'lucide-react'
 import Link from 'next/link'
-import { TableObjects } from '@/components/table-objects/table'
+import { TableObjects } from '@/components/shared/table-objects/table'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 

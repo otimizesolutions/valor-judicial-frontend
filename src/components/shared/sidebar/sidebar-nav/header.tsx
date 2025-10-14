@@ -1,5 +1,5 @@
 import { Command } from 'lucide-react'
-import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '../../ui/sidebar'
+import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 
 export function SidebarNavHeader() {
   return (
