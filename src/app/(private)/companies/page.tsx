@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Companies() {
   return (
-    <div className="m-8">
+    <div>
       <Header />
 
       {/* Table section */}

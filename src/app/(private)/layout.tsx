@@ -14,8 +14,8 @@ export default function PrivateLayout({ children }: { children: ReactNode }) {
     >
       <AppSidebar />
       <SidebarInset>
-        <main>
-          <SidebarTrigger />
+        <SidebarTrigger />
+        <main className="m-8">
           {children}
         </main>
 

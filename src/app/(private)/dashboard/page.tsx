@@ -35,7 +35,7 @@ export default function Dashboard() {
     },
   ]
   return (
-    <div className="m-8">
+    <div>
       <Header />
 
       <section className="mt-6 grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
