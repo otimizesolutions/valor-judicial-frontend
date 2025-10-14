@@ -24,12 +24,12 @@ const navTabs = [
       {
         title: 'Recuperações Judiciais',
         icon: Flag,
-        link: 'dashboard',
+        link: '/dashboard',
       },
       {
         title: 'Empresas',
         icon: Building,
-        link: 'companies',
+        link: '/companies',
       },
     ],
   },
@@ -41,7 +41,7 @@ const navTabs = [
       {
         title: 'Lorem',
         icon: Flag,
-        link: 'companies',
+        link: '/companies',
       },
     ],
   },

@@ -1,4 +1,15 @@
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
+import Link from 'next/link'
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar'
 
 export function SidebarCollapsible({ activeTab, activeSubTab, setActiveSubTab }) {
   /* This is the second sidebar */
@@ -16,26 +27,26 @@ export function SidebarCollapsible({ activeTab, activeSubTab, setActiveSubTab })
       <SidebarContent>
         <SidebarGroup className="px-0">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="px-4 flex flex-col gap-2">
               {activeTab.navSubTabs.map(subtab => (
                 <SidebarMenuItem key={subtab.title}>
-                  <SidebarMenuButton
-                    onClick={() => {
-                      setActiveSubTab(subtab)
-                    }}
-                    isActive={activeSubTab?.title === subtab.title}
+                  <Link
+                    href={subtab.link}
+                    className="flex flex-col items-start"
                   >
-                    <a
-                      href={subtab.link}
-                      className="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground flex flex-col items-start gap-2 p-4 text-sm leading-tight whitespace-nowrap"
+                    <SidebarMenuButton
+                      onClick={() => {
+                        setActiveSubTab(subtab)
+                      }}
+                      isActive={activeSubTab?.title === subtab.title}
                     >
                       <div className="flex w-full items-center space-x-2 [&>svg]:text-yellow-400">
                         <subtab.icon />
                         <span className="text-xs">{subtab.title}</span>
                       </div>
 
-                    </a>
-                  </SidebarMenuButton>
+                    </SidebarMenuButton>
+                  </Link>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
