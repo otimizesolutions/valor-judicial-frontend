@@ -1,37 +1,40 @@
-export type NextAuthUser = {
-  id: number;
-};
+export interface NextAuthUser {
+  id: number
+  name: string
+  email: string
+  photo: string
+}
 
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session {
-    user: NextAuthUser;
-    access: string;
-    refresh: string;
-    expires: string;
-    error?: string;
+    user: NextAuthUser
+    access: string
+    refresh: string
+    expires: string
+    error?: string
   }
 
   interface User {
-    access: string;
-    refresh: string;
-    user_info: NextAuthUser;
-    id: number;
+    access: string
+    refresh: string
+    user_info: NextAuthUser
+    id: number
     error?: {
-      status: number;
-      data: unknown;
-    };
+      status: number
+      data: unknown
+    }
   }
 }
 
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   interface JWT {
-    access: string;
-    refresh: string;
-    user: NextAuthUser;
-    sub: string;
-    iat: number;
-    exp: number;
-    jti: string;
-    error?: string;
+    access: string
+    refresh: string
+    user: NextAuthUser
+    sub: string
+    iat: number
+    exp: number
+    jti: string
+    error?: string
   }
 }

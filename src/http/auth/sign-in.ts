@@ -1,22 +1,25 @@
-import { api } from "@/lib/axios";
+import { api } from '@/lib/axios'
 
 export interface SignInRequest {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 export interface User {
-  id: number;
+  id: number
+  name: string
+  email: string
+  photo: string
 }
 
 export interface SignInResponse {
-  refresh: string;
-  access: string;
-  user: User;
+  refresh: string
+  access: string
+  user: User
 }
 
 export async function signIn(data: SignInRequest) {
-  const response = await api.post<SignInResponse>("/auth/tokens/", data);
+  const response = await api.post<SignInResponse>('/auth/tokens/', data)
 
-  return response;
+  return response
 }
