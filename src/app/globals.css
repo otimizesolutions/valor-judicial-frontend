@@ -203,6 +203,13 @@
   color: var(--color-gray-500)
 }
 
+.subtitle-form {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: "Poppins";
+  color: var(--color-blue-500);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
