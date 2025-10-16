@@ -1,6 +1,7 @@
 'use client'
 
 import { AlarmClock, ListFilterIcon, Settings2, TriangleAlert } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import { Header } from '@/components/dashboard/header'
 import { HighlightedLink } from '@/components/dashboard/highlighted-link'
 import { Table } from '@/components/dashboard/table'
@@ -34,6 +35,7 @@ export default function Dashboard() {
       link: '#',
     },
   ]
+
   return (
     <div>
       <Header />

@@ -1,4 +1,6 @@
+import { useSession } from 'next-auth/react'
 import { NavUser } from '@/components/nav-user'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +23,9 @@ export function SidebarNav({ navTabs, activeTab, setActiveTab }) {
   /* We disable collapsible and adjust width to icon. */
   /* This will make the sidebar appear as icons. */
   const { setOpen } = useSidebar()
+  const { data: session } = useSession()
+  const userPhoto = session?.user.photo
+
   return (
     <Sidebar
       collapsible="none"
@@ -44,10 +49,9 @@ export function SidebarNav({ navTabs, activeTab, setActiveTab }) {
                       setOpen(true)
                     }}
                     isActive={activeTab?.title === item.title}
-                    className="px-2.5 md:px-2"
+                    className="px-2.5 md:px-2 flex justify-center"
                   >
                     <item.icon />
-                    <span>{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -56,7 +60,10 @@ export function SidebarNav({ navTabs, activeTab, setActiveTab }) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        {/* <NavUser user={data.user} /> */}
+        <Avatar className="size-10">
+          <AvatarImage src={userPhoto} />
+          <AvatarFallback />
+        </Avatar>
       </SidebarFooter>
     </Sidebar>
   )
