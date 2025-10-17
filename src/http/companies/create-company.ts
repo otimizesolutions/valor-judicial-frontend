@@ -23,7 +23,5 @@ export interface CreateCompanyRequest {
 export async function createCompany(data: CreateCompanyRequest) {
   const response = await api.post('companies/', data)
 
-  // TODO Tentar colocar um toast, igual o que temos no formulário de login.
-
   return response
 }
