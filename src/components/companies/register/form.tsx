@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { CreateCompanySchema } from '@/components/companies/register/schema'
+import { InputCNPJ } from '@/components/shared/inputs/input-cnpj'
 import { Button } from '@/components/ui/button'
 // Assumindo que você tem esses componentes de UI:
 import { Input } from '@/components/ui/input'
@@ -35,6 +36,7 @@ export function Form() {
   const errors = form.formState.errors
 
   async function onSubmit(data) {
+    console.log('data ', data)
     try {
       await createCompany(data)
     }
@@ -68,7 +70,18 @@ export function Form() {
           <div className="flex items-center">
             <div className="flex-grow">
               <Label htmlFor="cnpj">CNPJ</Label>
-              <Input {...form.register('cnpj')} placeholder="XX.XXX.XXX/XXXX-XX" />
+              <Controller
+                name="cnpj"
+                control={form.control}
+                render={({ field }) => (
+                  <InputCNPJ
+                    value={field.value}
+                    onChange={field.onChange}
+                    name={field.name}
+                  />
+                )}
+
+              />
               {errors.cnpj && <p className="text-red-500 text-xs mt-1">{errors.cnpj.message}</p>}
             </div>
           </div>
