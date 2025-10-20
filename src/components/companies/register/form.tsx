@@ -4,11 +4,11 @@ import type { CreateCompanyRequest } from '@/components/companies/register/schem
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { CreateCompanySchema } from '@/components/companies/register/schema'
+import { InputError } from '@/components/shared/inputs/input-error'
 import { InputMask } from '@/components/shared/inputs/input-mask'
-import { InputPhone } from '@/components/shared/inputs/input-phone'
 import { Button } from '@/components/ui/button'
-// Assumindo que você tem esses componentes de UI:
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -29,17 +29,14 @@ const mockCidades = [{ value: 'Goiânia', label: 'Goiânia' }, { value: 'Campina
 export function Form() {
   const form = useForm<CreateCompanyRequest>({
     resolver: zodResolver(CreateCompanySchema),
-    // defaultValues: {
-    //   socios: [],
-    //   responsaveis: [{ nome: 'Tales Gomes de Souza' }], // Valor inicial da imagem
-    // },
+    // defaultValues: { ... },
   })
   const errors = form.formState.errors
 
   async function onSubmit(data) {
-    console.log('data ', data)
     try {
       await createCompany(data)
+      toast.success('Empresa criada com sucesso')
     }
     catch (error) {
       applyFormErrors(error, form)
@@ -57,14 +54,14 @@ export function Form() {
           <div>
             <Label htmlFor="trade_name">Razão social</Label>
             <Input {...form.register('trade_name')} placeholder="-" />
-            {errors.trade_name && <p className="text-red-500 text-xs mt-1">{errors.trade_name.message}</p>}
+            <InputError message={errors.trade_name?.message} />
           </div>
 
           {/* Nome fantasia */}
           <div>
             <Label htmlFor="company_name">Nome fantasia</Label>
             <Input {...form.register('company_name')} placeholder="-" />
-            {errors.company_name && <p className="text-red-500 text-xs mt-1">{errors.company_name.message}</p>}
+            <InputError message={errors.company_name?.message} />
           </div>
 
           {/* CNPJ */}
@@ -82,7 +79,7 @@ export function Form() {
                 />
               )}
             />
-            {errors.cnpj && <p className="text-red-500 text-xs mt-1">{errors.cnpj.message}</p>}
+            {errors.cnpj && <InputError message={errors.cnpj.message} />}
           </div>
         </div>
       </div>
@@ -110,11 +107,7 @@ export function Form() {
                 />
               )}
             />
-            {errors.address?.postal_code && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.address.postal_code.message}
-              </p>
-            )}
+            {errors.address?.postal_code && <InputError message={errors.address.postal_code.message} />}
           </div>
 
           {/* Rua / Logradouro */}
@@ -125,11 +118,7 @@ export function Form() {
               {...form.register('address.street')}
               placeholder="-"
             />
-            {errors.address?.street && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.address.street.message}
-              </p>
-            )}
+            {errors.address?.street && <InputError message={errors.address.street.message} />}
           </div>
 
           {/* Número */}
@@ -137,15 +126,11 @@ export function Form() {
             <Label htmlFor="address.number">Número</Label>
             <Input
               id="address.number"
-              type="number" // Garante que o input colete números (usando coerce.number() no Zod)
+              type="number"
               {...form.register('address.number')}
               placeholder="123"
             />
-            {errors.address?.number && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.address.number.message}
-              </p>
-            )}
+            <InputError message={errors.address?.number?.message} />
           </div>
 
           {/* Complemento */}
@@ -156,11 +141,7 @@ export function Form() {
               {...form.register('address.complement')}
               placeholder="Apto/Sala (Opcional)"
             />
-            {errors.address?.complement && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.address.complement.message}
-              </p>
-            )}
+            <InputError message={errors.address?.complement?.message} />
           </div>
 
           {/* Bairro */}
@@ -171,15 +152,9 @@ export function Form() {
               {...form.register('address.neighborhood')}
               placeholder="Centro"
             />
-            {errors.address?.neighborhood && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.address.neighborhood.message}
-              </p>
-            )}
+            <InputError message={errors.address?.neighborhood?.message} />
           </div>
         </div>
-
-        {/* Linha 2: Estado, Cidade */}
         <div className="grid grid-cols-2 gap-4">
 
           {/* Estado (Usando Controller para Select) */}
@@ -239,11 +214,7 @@ export function Form() {
                 />
               )}
             />
-            {errors.landline && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.landline.message}
-              </p>
-            )}
+            <InputError message={errors.landline?.message} />
           </div>
 
           {/* Celular (phone) */}
@@ -261,11 +232,7 @@ export function Form() {
                 />
               )}
             />
-            {errors.phone && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.phone.message}
-              </p>
-            )}
+            <InputError message={errors.phone?.message} />
           </div>
 
           {/* E-mail */}
@@ -277,11 +244,7 @@ export function Form() {
               {...form.register('email')}
               placeholder="contato@empresa.com.br"
             />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.email.message}
-              </p>
-            )}
+            <InputError message={errors.email?.message} />
           </div>
 
           {/* Site */}
@@ -293,11 +256,7 @@ export function Form() {
               {...form.register('site')}
               placeholder="https://www.site.com.br"
             />
-            {errors.site && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.site.message}
-              </p>
-            )}
+            <InputError message={errors.site?.message} />
           </div>
         </div>
       </div>
