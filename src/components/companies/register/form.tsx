@@ -68,24 +68,21 @@ export function Form() {
           </div>
 
           {/* CNPJ */}
-          <div className="flex items-center">
-            <div className="flex-grow">
-              <Label htmlFor="cnpj">CNPJ</Label>
-              <Controller
-                name="cnpj"
-                control={form.control}
-                render={({ field }) => (
-                  <InputMask
-                    maskFormat="##.###.###/####-##"
-                    value={field.value}
-                    onChange={field.onChange}
-                    name={field.name}
-                  />
-                )}
-
-              />
-              {errors.cnpj && <p className="text-red-500 text-xs mt-1">{errors.cnpj.message}</p>}
-            </div>
+          <div>
+            <Label htmlFor="cnpj">CNPJ</Label>
+            <Controller
+              name="cnpj"
+              control={form.control}
+              render={({ field }) => (
+                <InputMask
+                  maskFormat="##.###.###/####-##"
+                  value={field.value}
+                  onChange={field.onChange}
+                  name={field.name}
+                />
+              )}
+            />
+            {errors.cnpj && <p className="text-red-500 text-xs mt-1">{errors.cnpj.message}</p>}
           </div>
         </div>
       </div>
