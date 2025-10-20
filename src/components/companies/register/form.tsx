@@ -101,10 +101,17 @@ export function Form() {
           {/* CEP */}
           <div>
             <Label htmlFor="address.postal_code">CEP</Label>
-            <Input
-              id="address.postal_code"
-              {...form.register('address.postal_code')}
-              placeholder="XXXXX-XXX"
+            <Controller
+              name="address.postal_code"
+              control={form.control}
+              render={({ field }) => (
+                <InputMask
+                  maskFormat="#####-###"
+                  value={field.value}
+                  onChange={field.onChange}
+                  name={field.name}
+                />
+              )}
             />
             {errors.address?.postal_code && (
               <p className="text-red-500 text-xs mt-1">
@@ -223,10 +230,17 @@ export function Form() {
           {/* Telefone Fixo (landline) */}
           <div>
             <Label htmlFor="landline">Telefone Fixo</Label>
-            <Input
-              id="landline"
-              {...form.register('landline')}
-              placeholder="(XX) XXXX-XXXX"
+            <Controller
+              name="landline"
+              control={form.control}
+              render={({ field }) => (
+                <InputMask
+                  maskFormat="(##)####-####"
+                  value={field.value}
+                  onChange={field.onChange}
+                  name={field.name}
+                />
+              )}
             />
             {errors.landline && (
               <p className="text-red-500 text-xs mt-1">
@@ -280,7 +294,7 @@ export function Form() {
               id="site"
               type="url"
               {...form.register('site')}
-              placeholder="https://www.site.com.br (Opcional)"
+              placeholder="https://www.site.com.br"
             />
             {errors.site && (
               <p className="text-red-500 text-xs mt-1">
