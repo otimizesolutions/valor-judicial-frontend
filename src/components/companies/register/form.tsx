@@ -5,7 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { CreateCompanySchema } from '@/components/companies/register/schema'
-import { InputCNPJ } from '@/components/shared/inputs/input-cnpj'
+import { InputMask } from '@/components/shared/inputs/input-mask'
+import { InputPhone } from '@/components/shared/inputs/input-phone'
 import { Button } from '@/components/ui/button'
 // Assumindo que você tem esses componentes de UI:
 import { Input } from '@/components/ui/input'
@@ -74,7 +75,8 @@ export function Form() {
                 name="cnpj"
                 control={form.control}
                 render={({ field }) => (
-                  <InputCNPJ
+                  <InputMask
+                    maskFormat="##.###.###/####-##"
                     value={field.value}
                     onChange={field.onChange}
                     name={field.name}
@@ -236,10 +238,17 @@ export function Form() {
           {/* Celular (phone) */}
           <div>
             <Label htmlFor="phone">Celular</Label>
-            <Input
-              id="phone"
-              {...form.register('phone')}
-              placeholder="(XX) 9XXXX-XXXX"
+            <Controller
+              name="phone"
+              control={form.control}
+              render={({ field }) => (
+                <InputMask
+                  maskFormat="(##)#####-####"
+                  value={field.value}
+                  onChange={field.onChange}
+                  name={field.name}
+                />
+              )}
             />
             {errors.phone && (
               <p className="text-red-500 text-xs mt-1">
