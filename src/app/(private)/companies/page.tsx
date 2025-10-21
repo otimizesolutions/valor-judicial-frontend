@@ -1,29 +1,22 @@
 'use client'
 
-import { ListFilterIcon } from 'lucide-react'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-import { useEffect, useState } from 'react'
+import { ListFilterIcon } from 'lucide-react'
 import { Header } from '@/components/companies/header'
 import { Table } from '@/components/companies/table'
 import { Button } from '@/components/ui/button'
 import { fetchCompanies } from '@/http/companies/fetch-companies'
 
 export default function Companies() {
-  const [dataJson, setDataJson] = useState(null)
+  const { data: companies } = useSuspenseQuery({
+    queryKey: ['companies'],
+    queryFn: async () => {
+      const response = await fetchCompanies()
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await fetchCompanies()
-        setDataJson(response.data.results)
-      }
-      catch (error) {
-        console.error('Erro ao buscar empresas:', error)
-      }
-    }
-
-    getData()
-  }, [])
+      return response.data.results
+    },
+  })
 
   return (
     <div>
@@ -38,10 +31,9 @@ export default function Companies() {
           </Button>
         </div>
 
-        {dataJson && <Table data={dataJson} />}
+        <Table data={companies} />
 
       </section>
-
     </div>
   )
 }
