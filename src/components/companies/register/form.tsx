@@ -1,4 +1,3 @@
-// src/components/CadastroEmpresaForm.tsx
 'use client'
 import type { CreateCompanyRequest } from '@/components/companies/register/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +21,6 @@ import { Separator } from '@/components/ui/separator'
 import { createCompany } from '@/http/companies/create-company'
 import { applyFormErrors } from '@/utils/errors'
 
-// Lista de estados e cidades simplificada para o Select
 const mockEstados = [{ value: 'GO', label: 'Goiás' }, { value: 'SP', label: 'São Paulo' }]
 const mockCidades = [{ value: 'Goiânia', label: 'Goiânia' }, { value: 'Campinas', label: 'Campinas' }]
 
