@@ -1,10 +1,9 @@
 'use client'
-import type { CreateCompanyRequest } from '@/components/companies/register/schema'
+import type { CreateCompanyRequest } from '@/schemas/companies'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { CreateCompanySchema } from '@/components/companies/register/schema'
 import { InputError } from '@/components/shared/inputs/input-error'
 import { InputMask } from '@/components/shared/inputs/input-mask'
 import { Button } from '@/components/ui/button'
@@ -19,28 +18,30 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { createCompany } from '@/http/companies/create-company'
+import mockStates from '@/mocks/states.json'
+import { useSaveCompanyMutation } from '@/mutations/companies'
+import { useCompanyById } from '@/queries/companies'
+import { CreateCompanySchema } from '@/schemas/companies'
 import { applyFormErrors } from '@/utils/errors'
 
-const mockEstados = [{ value: 'GO', label: 'Goiás' }, { value: 'SP', label: 'São Paulo' }]
 const mockCidades = [{ value: 'Goiânia', label: 'Goiânia' }, { value: 'Campinas', label: 'Campinas' }]
 
-export function Form() {
+export function Form({ companyId }: { companyId?: number }) {
+  const { data: company } = useCompanyById(companyId)
   const form = useForm<CreateCompanyRequest>({
     resolver: zodResolver(CreateCompanySchema),
-    // defaultValues: { ... },
-    // 
+    defaultValues: company || {},
   })
   const errors = form.formState.errors
 
-  async function onSubmit(data) {
-    try {
-      await createCompany(data)
-      toast.success('Empresa criada com sucesso')
-    }
-    catch (error) {
-      applyFormErrors(error, form)
-    }
+  const saveCompanyMutation = useSaveCompanyMutation(companyId || null, form)
+
+  function onSubmit(values) {
+    console.log('onSubmit ', values)
+    saveCompanyMutation.mutate(values)
   }
+
+  console.log('errors formulário ', errors)
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-6 border rounded-lg bg-white">
@@ -166,7 +167,7 @@ export function Form() {
                   <SelectValue placeholder="Estado" />
                 </SelectTrigger>
                 <SelectContent>
-                  {mockEstados.map(e => <SelectItem key={e.value} value={e.value}>{e.label}</SelectItem>)}
+                  {mockStates.map(state => <SelectItem key={state} value={state}>{state}</SelectItem>)}
                 </SelectContent>
               </Select>
             )}
