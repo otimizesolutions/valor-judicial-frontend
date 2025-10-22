@@ -1,4 +1,4 @@
-import { Form } from '@/components/companies/register/form'
+import { Form } from '@/components/companies/form'
 
 interface CompanyEditProps {
   params: {

@@ -1,8 +1,7 @@
-import { Form } from '@/components/companies/register/form'
+import { Form } from '@/components/companies/form'
 import { Header } from '@/components/companies/register/header'
-// import { Header } from '@/components/companies/register/form'
 
-export default function Register() {
+export default function CompanyRegister() {
   return (
     <div>
       <Header />

@@ -6,6 +6,7 @@ import { TableObjects } from '@/components/shared/table-objects/table'
 import { Button } from '@/components/ui/button'
 
 export function Table({ data: dataJson }: { data: FetchCompanyResponse[] }) {
+  // TODO Vai ter reordenação ebaaa :')
   const columns: ColumnDef<FetchCompanyResponse>[] = [
     {
       accessorKey: 'company_name',
@@ -33,14 +34,14 @@ export function Table({ data: dataJson }: { data: FetchCompanyResponse[] }) {
           <div className="flex items-center justify-end space-x-5 pr-6">
 
             {/* Botão Detalhe */}
-            <Link href={`companies/${companyId}`} passHref>
+            {/* <Link href={`companies/${companyId}`} passHref>
               <Button variant="ghost" size="icon">
                 <Eye />
               </Button>
-            </Link>
+            </Link> */}
 
             {/* Botão Editar */}
-            <Link href={`companies/${companyId}/edit`} passHref>
+            <Link href={`companies/edit/${companyId}`} passHref>
               <Button variant="ghost" size="icon">
                 <Edit2 />
               </Button>
