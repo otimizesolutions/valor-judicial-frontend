@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { InputPattern } from '@/components/shared/inputs/input-pattern'
 
 function removeMask(value: string): string {
@@ -19,6 +19,10 @@ export function InputMask({
   maskFormat: string
 }) {
   const [value, setValue] = useState(String(rawValue || ''))
+
+  useEffect(() => {
+    setValue(String(rawValue || ''))
+  }, [rawValue])
 
   function handleChange(value: string) {
     setValue(value)
