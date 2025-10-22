@@ -1,5 +1,6 @@
-import Link from 'next/link'
+import type { SubTab, Tab } from '../interfaces'
 
+import Link from 'next/link'
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +12,12 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 
-export function SidebarCollapsible({ activeTab, activeSubTab, setActiveSubTab }) {
+interface SidebarCollapsibleProps {
+  activeTab: Tab
+  activeSubTab: SubTab
+}
+
+export function SidebarCollapsible({ activeTab, activeSubTab }: SidebarCollapsibleProps) {
   /* This is the second sidebar */
   /* We disable collapsible and let it fill remaining space */
   return (
@@ -34,12 +40,7 @@ export function SidebarCollapsible({ activeTab, activeSubTab, setActiveSubTab })
                     href={subtab.link}
                     className="flex flex-col items-start"
                   >
-                    <SidebarMenuButton
-                      onClick={() => {
-                        setActiveSubTab(subtab)
-                      }}
-                      isActive={activeSubTab?.title === subtab.title}
-                    >
+                    <SidebarMenuButton isActive={activeSubTab?.title === subtab.title}>
                       <div className="flex w-full items-center space-x-2 [&>svg]:text-yellow-400">
                         <subtab.icon />
                         <span className="text-xs">{subtab.title}</span>

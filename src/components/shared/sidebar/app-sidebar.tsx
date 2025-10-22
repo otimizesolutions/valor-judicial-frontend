@@ -1,24 +1,17 @@
 'use client'
 
-import type { IconNode } from 'lucide-react'
+import type { SubTab, Tab } from './interfaces'
 import { Building, Flag, Home } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 
+import { usePathname } from 'next/navigation'
 import * as React from 'react'
 import { Sidebar } from '@/components/ui/sidebar'
 import { SidebarCollapsible } from './sidebar-collapsible/siderbar-collapsible'
 import { SidebarNav } from './sidebar-nav/sidebar-nav'
 
-interface Tab {
-  title: string
-  link: string
-  icon: IconNode
-}
-
-const navTabs = [
+const navTabs: Tab[] = [
   {
     title: 'Dashboard',
-    url: '#',
     icon: Home,
     navSubTabs: [
       {
@@ -35,23 +28,43 @@ const navTabs = [
   },
   {
     title: 'Cadastros',
-    url: '#',
     icon: Building,
     navSubTabs: [
       {
         title: 'Lorem',
         icon: Flag,
-        link: '/companies',
+        link: '/companiess',
       },
     ],
   },
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [activeTab, setActiveTab] = React.useState(navTabs[0])
-  const [activeSubTab, setActiveSubTab] = React.useState(activeTab.navSubTabs[0])
-  const pathName = usePathname()
-  console.log('pathname', pathName)
+  const pathName = usePathname().split('/')[1]
+  function getActiveTabs(): [Tab, SubTab] {
+    let openedTab: Tab
+    let openedSubTab: SubTab
+
+    for (const tab of navTabs) {
+      for (const subTab of tab.navSubTabs) {
+        if (subTab.link.replace('/', '') === pathName) {
+          openedTab = tab
+          openedSubTab = subTab
+
+          return [openedTab, openedSubTab]
+        }
+      }
+    }
+    openedTab = navTabs[0]
+    openedSubTab = openedTab.navSubTabs[0]
+
+    console.log('Pathname não encontrado ', pathName)
+
+    return [openedTab, openedSubTab]
+  }
+
+  const [openedTab, openedSubTab] = getActiveTabs()
+  const [activeTab, setActiveTab] = React.useState(openedTab)
 
   return (
     <Sidebar
@@ -67,8 +80,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarCollapsible
         activeTab={activeTab}
-        activeSubTab={activeSubTab}
-        setActiveSubTab={setActiveSubTab}
+        activeSubTab={openedSubTab}
       />
 
     </Sidebar>

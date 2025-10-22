@@ -1,5 +1,6 @@
+import type { Dispatch, SetStateAction } from 'react'
+import type { Tab } from '../interfaces'
 import { useSession } from 'next-auth/react'
-import { NavUser } from '@/components/nav-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Sidebar,
@@ -14,11 +15,13 @@ import {
 } from '@/components/ui/sidebar'
 import { SidebarNavHeader } from './header'
 
-// interface SidebarNavProps {
-//   navTabs:
-// }
+interface SidebarNavProps {
+  navTabs: Tab[]
+  activeTab: Tab
+  setActiveTab: Dispatch<SetStateAction<Tab>>
+}
 
-export function SidebarNav({ navTabs, activeTab, setActiveTab }) {
+export function SidebarNav({ navTabs, activeTab, setActiveTab }: SidebarNavProps) {
   /* This is the first sidebar */
   /* We disable collapsible and adjust width to icon. */
   /* This will make the sidebar appear as icons. */
