@@ -3,30 +3,24 @@
 import type { useForm } from 'react-hook-form'
 import type { CreateCompanyRequest } from '@/schemas/companies' // Seu tipo de dados
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { createCompany } from '@/http/companies/create-company'
 import { updateCompany } from '@/http/companies/update-company'
 import { applyFormErrors } from '@/utils/errors'
 
-// Defina o tipo de dados que a mutação vai receber
-// O data é o objeto completo do formulário
 type MutationData = CreateCompanyRequest
 
 // Tipagem do Form (Ajuste 'any' se souber o tipo exato do seu Form)
 type FormInstance = ReturnType<typeof useForm<MutationData>>
 
-export function useSaveCompanyMutation(companyId: number | null,
-  // Passamos a instância completa do useForm para aplicar erros
-  form: FormInstance) {
+export function useSaveCompanyMutation(companyId: number | null, form: FormInstance) {
   const queryClient = useQueryClient()
-
-  // Você pode injetar hooks de navegação ou busca se necessário (como no seu exemplo)
-  // const navigate = useNavigate();
+  const router = useRouter()
 
   return useMutation<unknown, unknown, MutationData>({
 
     mutationFn: (data) => {
-      console.log('rodei ', data)
       if (!companyId) {
         return createCompany(data)
       }
@@ -40,12 +34,13 @@ export function useSaveCompanyMutation(companyId: number | null,
       if (companyId) {
         queryClient.invalidateQueries({ queryKey: ['companies', companyId] })
         toast.success('Empresa atualizada com sucesso!')
-        // await navigate('/dashboard/companies'); // Exemplo de navegação
+        router.push('/companies')
+
         return
       }
 
       toast.success('Empresa criada com sucesso!')
-      // await navigate('/dashboard/companies'); // Exemplo de navegação
+      router.push('/companies')
     },
 
     onError: (error: any) => {
