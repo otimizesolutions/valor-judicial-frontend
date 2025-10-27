@@ -1,4 +1,6 @@
-import { Command } from 'lucide-react'
+// import { Command } from 'lucide-react'
+import VIcon from '@public/v-icon.svg'
+import Image from 'next/image'
 import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 
 export function SidebarNavHeader() {
@@ -6,11 +8,9 @@ export function SidebarNavHeader() {
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton size="lg" asChild className="md:h-8 md:p-0 flex justify-center">
+          <SidebarMenuButton size="lg" asChild className="flex justify-center size-12">
             <a href="#">
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <Command className="size-4" />
-              </div>
+              <Image src={VIcon} alt="Logo da Valor Judicial" className="size-5" />
             </a>
           </SidebarMenuButton>
         </SidebarMenuItem>

@@ -32,7 +32,7 @@ export function SidebarNav({ navTabs, activeTab, setActiveTab }: SidebarNavProps
   return (
     <Sidebar
       collapsible="none"
-      className="w-[calc(var(--sidebar-width-icon)+1px)]!"
+      className="lg:min-w-20 lg:max-w-20 lg:items-center"
     >
       <SidebarNavHeader />
 
@@ -52,9 +52,9 @@ export function SidebarNav({ navTabs, activeTab, setActiveTab }: SidebarNavProps
                       setOpen(true)
                     }}
                     isActive={activeTab?.title === item.title}
-                    className="px-2.5 md:px-2 flex justify-center"
+                    className="px-2.5 md:px-3 size-12 flex justify-center"
                   >
-                    <item.icon />
+                    <item.icon className="" />
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
