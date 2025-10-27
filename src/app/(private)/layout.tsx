@@ -1,4 +1,5 @@
-import { Suspense, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { Suspense } from 'react'
 import { AppSidebar } from '@/components/shared/sidebar/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 

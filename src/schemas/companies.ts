@@ -33,7 +33,7 @@ export const CreateCompanySchema = z.object({
   phone: z.string().min(8, 'O telefone é obrigatório.'),
   email: z.email('Formato de e-mail inválido.'),
   site: z.url('A URL do site é inválida.').or(z.literal('')).optional(),
-  user_id: z.number().int('O ID do usuário deve ser um número inteiro.').nullable(),
+  user_id: z.number().int('O ID do usuário deve ser um número inteiro.').nullable().optional(),
   address: AddressSchema,
 })
 

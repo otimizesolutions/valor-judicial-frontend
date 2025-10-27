@@ -1,3 +1,4 @@
+import { Header } from '@/components/companies/edit/header'
 import { Form } from '@/components/companies/form'
 
 interface CompanyEditProps {
@@ -11,9 +12,7 @@ export default function CompanyEdit({ params }: CompanyEditProps) {
 
   return (
     <div>
-      <h1>
-        Edit Company
-      </h1>
+      <Header />
       <Form companyId={companyId} />
     </div>
   )

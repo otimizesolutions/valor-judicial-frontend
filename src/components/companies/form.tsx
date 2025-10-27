@@ -3,28 +3,18 @@ import type { CreateCompanyRequest } from '@/schemas/companies'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { InputError } from '@/components/shared/inputs/input-error'
 import { InputMask } from '@/components/shared/inputs/input-mask'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { createCompany } from '@/http/companies/create-company'
+import mockCities from '@/mocks/cities.json'
 import mockStates from '@/mocks/states.json'
 import { useSaveCompanyMutation } from '@/mutations/companies'
 import { useCompanyById } from '@/queries/companies'
 import { CreateCompanySchema } from '@/schemas/companies'
-import { applyFormErrors } from '@/utils/errors'
-
-const mockCidades = [{ value: 'Goiânia', label: 'Goiânia' }, { value: 'Campinas', label: 'Campinas' }]
+import { Combobox } from '../shared/combobox'
 
 export function Form({ companyId }: { companyId?: number }) {
   const { data: company } = useCompanyById(companyId)
@@ -32,6 +22,9 @@ export function Form({ companyId }: { companyId?: number }) {
     resolver: zodResolver(CreateCompanySchema),
     defaultValues: company || {},
   })
+  const watchedState = form.watch('address.state')
+  const citiesOptions = mockCities.find(state => state.name === watchedState)?.cities
+
   const errors = form.formState.errors
 
   const saveCompanyMutation = useSaveCompanyMutation(companyId || null, form)
@@ -86,12 +79,12 @@ export function Form({ companyId }: { companyId?: number }) {
 
       <Separator />
 
-      {/* --- ENDEREÇO E CONTATOS --- */}
+      {/* --- ENDEREÇO --- */}
       <div className="space-y-4">
-        <h2 className="subtitle-form">Endereço e contatos</h2>
+        <h2 className="subtitle-form">Endereço</h2>
 
         {/* Linha 1: CEP, Logradouro, Número, Complemento, Bairro */}
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           {/* CEP */}
           <div>
             <Label htmlFor="address.postal_code">CEP</Label>
@@ -121,6 +114,45 @@ export function Form({ companyId }: { companyId?: number }) {
             {errors.address?.street && <InputError message={errors.address.street.message} />}
           </div>
 
+          <div>
+            {/* Estado (Usando Controller para Select) */}
+            <Label htmlFor="address.state">Estado</Label>
+            <Controller
+              name="address.state"
+              control={form.control}
+              render={({ field }) => (
+                <Combobox
+                  label="Estado"
+                  options={mockStates}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+            {errors.address?.state && <InputError message={errors.address?.state.message} />}
+          </div>
+
+          {/* Cidade (Usando Controller para Select) */}
+          <div>
+            <Label htmlFor="address.city">Cidade</Label>
+            <Controller
+              name="address.city"
+              control={form.control}
+              render={({ field }) => (
+                <Combobox
+                  label="Cidade"
+                  options={citiesOptions}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+
+            />
+
+          </div>
+
+        </div>
+        <div className="grid grid-cols-3 gap-4">
           {/* Número */}
           <div>
             <Label htmlFor="address.number">Número</Label>
@@ -154,40 +186,6 @@ export function Form({ companyId }: { companyId?: number }) {
             />
             <InputError message={errors.address?.neighborhood?.message} />
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-
-          {/* Estado (Usando Controller para Select) */}
-          <Controller
-            name="address.state"
-            control={form.control}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Estado" />
-                </SelectTrigger>
-                <SelectContent>
-                  {mockStates.map(state => <SelectItem key={state} value={state}>{state}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            )}
-          />
-
-          {/* Cidade (Usando Controller para Select) */}
-          <Controller
-            name="address.city"
-            control={form.control}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Cidade" />
-                </SelectTrigger>
-                <SelectContent>
-                  {mockCidades.map(c => <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            )}
-          />
 
         </div>
       </div>
