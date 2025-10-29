@@ -3,9 +3,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 @theme {
-  
+
   --color-blue-50: #93bfd2;
   --color-blue-100: #7da8bb;
   --color-blue-200: #6792a5;
@@ -16,7 +15,7 @@
   --color-blue-700: #082d39;
   --color-blue-800: #0c1a20;
   --color-blue-900: #000000;
-  
+
   /* Escala de Cores - Amarelo (Linha 2) */
   --color-yellow-50: #fffba;
   --color-yellow-100: #ffe280;
@@ -28,9 +27,9 @@
   --color-yellow-700: #865705;
   --color-yellow-800: #6f4403;
   --color-yellow-900: #593100;
-  
+
   /* Escala de Cores - Cinza */
-  --color-gray-50: #ffffff;
+  --color-gray-50: #e5e7e9;
   --color-gray-100: #e2e3e5;
   --color-gray-200: #c5c9cc;
   --color-gray-300: #a9adb3;
@@ -40,7 +39,7 @@
   --color-gray-700: #464b50;
   --color-gray-800: #30353a;
   --color-gray-900: #1c2025;
-  
+
   /* Escala de Cores - Vermelho */
   --color-red-50: #ffe7ea;
   --color-red-100: #ffc5c6;
@@ -52,7 +51,7 @@
   --color-red-700: #8a1e28;
   --color-red-800: #690e17;
   --color-red-900: #4b0000;
-  
+
   /* Escala de Cores - Amarelo (Linha 5 e 6) */
   --color-yellow-extra-light: #fffccd;
   --color-yellow-extra-100: #ffe392;
@@ -64,7 +63,7 @@
   --color-yellow-extra-700: #8e590d;
   --color-yellow-extra-800: #774606;
   --color-yellow-extra-900: #613300;
-  
+
   /* Escala de Cores - Verde */
   --color-green-50: #d8ffff;
   --color-green-100: #aee9d8;
@@ -76,7 +75,7 @@
   --color-green-700: #0e582d;
   --color-green-800: #034118;
   --color-green-900: #002b00;
-  
+
   --font-lato: var(--font-lato);
   --font-poppins: var(--font-poppins);
 }
@@ -84,14 +83,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-ring: var(--color-blue-400);
   --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--color-white);
+  --color-sidebar-accent: var(--color-blue-400);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
+  --color-sidebar-primary: var(--color-red);
+  --color-sidebar-foreground: var(--color-white);
+  --color-sidebar: var(--color-blue-700);
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
@@ -186,6 +185,29 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: var(--color-gray-900)
+}
+
+.subtitle {
+  color: var(--color-gray-500)
+}
+
+.subtitle-form {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: "Poppins";
+  color: var(--color-blue-500);
 }
 
 @layer base {

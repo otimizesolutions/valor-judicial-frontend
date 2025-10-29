@@ -15,6 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import formSchema from "./schema";
 import { useLoginMutation } from "../mutations/useLoginMutation";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,7 +42,7 @@ export const LoginForm = () => {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Seu e-mail" {...field} />
+                <Input type="email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -53,25 +55,36 @@ export const LoginForm = () => {
             <FormItem>
               <FormLabel>Senha</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Sua senha" {...field} />
+                <Input type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <div className="flex justify-between">
+          <div className="centered gap-2">
+            {/* TODO Como fazer para manter os dados de entrada ? */}
+            <Checkbox className="data-[state=checked]:bg-yellow-200 data-[state=checked]:border-yellow-200 size-4"/>
+            <Label className="text-gray-900">Lembrar dados</Label>
+          </div>
+          <Link href={''} className="text-gray-900">Esqueci minha senha</Link>
+        </div>
         <div className="flex flex-col items-center">
           <Button
             type="submit"
-            variant="destructive"
+            variant="secondary"
             disabled={loginMutation.isPending}
-            className="cursor-pointer"
           >
-            {loginMutation.isPending ? "Entrando..." : "Entrar"}
+            {loginMutation.isPending ? "Signing in..." : "Sign In"}
           </Button>
 
-          <Link href="/auth/signup" className="mt-5">
-            Criar uma conta
-          </Link>
+          <div className="flex gap-1 mt-5">
+            <p className="text-gray-900">Não tem uma conta?</p>
+            <Link href="/auth/signup" className="text-blue-600 hover:underline">
+              Clique aqui
+            </Link>
+          </div>
+          
         </div>
       </form>
     </Form>

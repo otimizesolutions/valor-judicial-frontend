@@ -1,57 +1,58 @@
-import { fromUnixTime, isAfter } from "date-fns";
-import { jwtDecode } from "jwt-decode";
-import NextAuth from "next-auth";
-import { JWT } from "next-auth/jwt";
-import CredentialsProvider from "next-auth/providers/credentials";
+import type { JWT } from 'next-auth/jwt'
+import { AxiosError } from 'axios'
+import { fromUnixTime, isAfter } from 'date-fns'
+import { jwtDecode } from 'jwt-decode'
+import NextAuth from 'next-auth'
 
-import { env } from "@/env";
+import CredentialsProvider from 'next-auth/providers/credentials'
 
-import { refreshToken as refresh } from "@/http/auth/refresh";
-import { signIn } from "@/http/auth/sign-in";
-import { AxiosError } from "axios";
+import { env } from '@/env'
+import { refreshToken as refresh } from '@/http/auth/refresh'
+import { signIn } from '@/http/auth/sign-in'
 
 async function refreshToken(token: JWT): Promise<JWT> {
   try {
     const response = await refresh({
       refresh: token.refresh,
-    });
+    })
 
     if (response.status !== 200) {
-      return { ...token, error: "RefreshAccessTokenError" };
+      return { ...token, error: 'RefreshAccessTokenError' }
     }
 
     if (response.data.access) {
       token = {
         ...token,
         access: response.data.access,
-      };
+      }
     }
-  } catch {
-    return { ...token, error: "RefreshAccessTokenError" };
+  }
+  catch {
+    return { ...token, error: 'RefreshAccessTokenError' }
   }
 
-  return token;
+  return token
 }
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: 'credentials',
       credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: { label: 'email', type: 'text' },
+        password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          return null
         }
-        const { email, password } = credentials;
+        const { email, password } = credentials
 
         try {
           const response = await signIn({
             email,
             password,
-          });
+          })
           if (response.status !== 200) {
             return {
               error: {
@@ -59,12 +60,15 @@ const handler = NextAuth({
                 data: response.data,
               },
               id: 0,
-              access: "",
-              refresh: "",
+              access: '',
+              refresh: '',
               user_info: {
                 id: 0,
+                name: '',
+                email: '',
+                photo: '',
               },
-            };
+            }
           }
 
           return {
@@ -73,9 +77,13 @@ const handler = NextAuth({
             id: response.data.user.id,
             user_info: {
               id: response.data.user.id,
+              name: response.data.user.name,
+              email: response.data.user.email,
+              photo: response.data.user.photo,
             },
-          };
-        } catch (error: unknown) {
+          }
+        }
+        catch (error: unknown) {
           if (error instanceof AxiosError) {
             return {
               error: {
@@ -83,26 +91,32 @@ const handler = NextAuth({
                 data: error?.response?.data,
               },
               id: 0,
-              access: "",
-              refresh: "",
+              access: '',
+              refresh: '',
               user_info: {
                 id: 0,
+                name: '',
+                email: '',
+                photo: '',
               },
-            };
+            }
           }
         }
         return {
           error: {
             status: 400,
-            data: { detail: "Erro desconhecido!" },
+            data: { detail: 'Erro desconhecido!' },
           },
           id: 0,
-          access: "",
-          refresh: "",
+          access: '',
+          refresh: '',
           user_info: {
             id: 0,
+            name: '',
+            email: '',
+            photo: '',
           },
-        };
+        }
       },
     }),
   ],
@@ -110,60 +124,66 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user }) {
       if (user.error) {
-        throw new Error(JSON.stringify(user.error.data));
+        throw new Error(JSON.stringify(user.error.data))
       }
-      return true;
+      return true
     },
 
     async jwt({ token, user, trigger, session, account }) {
-      if (account?.provider === "credentials") {
+      if (account?.provider === 'credentials') {
         if (user) {
-          const access = user.access;
-          const refresh = user.refresh;
+          const access = user.access
+          const refresh = user.refresh
           const userInfo = {
             id: user.user_info.id,
-          };
+            name: user.user_info.name,
+            email: user.user_info.email,
+            photo: user.user_info.photo,
+          }
 
           token = {
             ...token,
             access,
             refresh,
             user: userInfo,
-          };
+          }
         }
       }
 
-      if (trigger === "update") {
-        return { ...token, ...session };
+      if (trigger === 'update') {
+        return { ...token, ...session }
       }
 
-      const access = jwtDecode(token.access);
+      const access = jwtDecode(token.access)
 
-      const currentTime = new Date();
-      const accessExpTime = access.exp ? fromUnixTime(access.exp) : null;
+      const currentTime = new Date()
+      const accessExpTime = access.exp ? fromUnixTime(access.exp) : null
 
       if (accessExpTime && isAfter(currentTime, accessExpTime)) {
-        const refreshedToken = await refreshToken(token);
+        const refreshedToken = await refreshToken(token)
 
-        token = refreshedToken;
+        token = refreshedToken
       }
 
-      return token;
+      return token
     },
 
     async session({ token, session }) {
-      session.access = token.access;
-      session.refresh = token.refresh;
-      session.error = token.error;
+      session.user = {
+        ...token.user,
+      }
+      session.access = token.access
+      session.refresh = token.refresh
+      session.error = token.error
 
-      return session;
+      return session
     },
   },
   secret: env.NEXTAUTH_SECRET,
   jwt: {
     secret: env.NEXTAUTH_SECRET,
   },
-  pages: { signIn: "/auth/sign-in" },
-});
+  pages: { signIn: '/auth/sign-in' },
+})
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
