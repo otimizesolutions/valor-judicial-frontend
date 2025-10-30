@@ -30,11 +30,8 @@ export function Form({ companyId }: { companyId?: number }) {
   const saveCompanyMutation = useSaveCompanyMutation(companyId || null, form)
 
   function onSubmit(values) {
-    console.log('onSubmit ', values)
     saveCompanyMutation.mutate(values)
   }
-
-  console.log('errors formulário ', errors)
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-6 border rounded-lg bg-white">
