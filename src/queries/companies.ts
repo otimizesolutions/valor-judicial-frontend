@@ -1,12 +1,9 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { toast } from 'sonner'
-import { createCompany } from '@/http/companies/create-company'
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { fetchCompanies } from '@/http/companies/fetch-companies'
 import { api } from '@/lib/axios'
-import { applyFormErrors } from '@/utils/errors'
 
 export function fetchAll() {
-  const query = useSuspenseQuery({
+  const query = useQuery({
     queryKey: ['companies'],
     queryFn: async () => {
       const response = await fetchCompanies()
