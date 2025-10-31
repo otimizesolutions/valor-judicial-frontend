@@ -1,26 +1,26 @@
-import axios from "axios";
-import { getSession } from "next-auth/react";
+import axios from 'axios'
+import { getSession } from 'next-auth/react'
 
-import { env } from "@/env";
+import { env } from '@/env'
 
-const ApiClient = () => {
+function ApiClient() {
   const defaultOptions = {
     baseURL: env.NEXT_PUBLIC_API_BASE_URL,
-  };
+  }
 
-  const instance = axios.create(defaultOptions);
+  const instance = axios.create(defaultOptions)
 
   instance.interceptors.request.use(async (request) => {
-    const session = await getSession();
+    const session = await getSession()
 
     if (session) {
-      request.headers.Authorization = `Bearer ${session.access}`;
+      request.headers.Authorization = `Bearer ${session.access}`
     }
 
-    return request;
-  });
+    return request
+  })
 
-  return instance;
-};
+  return instance
+}
 
-export const api = ApiClient();
+export const api = ApiClient()
